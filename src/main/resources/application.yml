@@ -1,0 +1,4 @@
+# 运行环境 开发-dev、仿真-model、生产-prod
+spring:
+  profiles:
+    active: dev

@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "628d7515-4a69-4250-925f-33df04024ca0",
+		"name": "zcy-patent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "rest",
+			"item": [
+				{
+					"name": "getZcyPtArchiveAskById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8091/zcy-patent/zcyPtArchiveAsk/getZcyPtArchiveAskById/1"
+					},
+					"response": []
+				},
+				{
+					"name": "saveZcyPtArchiveAsk",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"archiveId\":1546,\n    \"askType\":654335,\n    \"name\":\"要求名称1\",\n    \"content\":\"要求内容1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8091/zcy-patent/zcyPtArchiveAsk/saveZcyPtArchiveAsk"
+					},
+					"response": []
+				},
+				{
+					"name": "getZcyPtArchiveAskList",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8091/zcy-patent/zcyPtArchiveAsk/getZcyPtArchiveAskList"
+					},
+					"response": []
+				},
+				{
+					"name": "getZcyPtArchiveAskPageList",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"archiveId\":1546,\n    \"askType\":654335,\n    \"name\":\"要求名称1\",\n    \"content\":\"要求内容1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/zcy-patent/zcyPtArchiveAsk/getZcyPtArchiveAskPageList?pageNum=1&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"zcy-patent",
+								"zcyPtArchiveAsk",
+								"getZcyPtArchiveAskPageList"
+							],
+							"query": [
+								{
+									"key": "pageNum",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateZcyPtArchiveAsk",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1,\n    \"archiveId\":1546,\n    \"askType\":654335,\n    \"name\":\"要求名称1\",\n    \"content\":\"要求内容1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8091/zcy-patent/zcyPtArchiveAsk/updateZcyPtArchiveAsk"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tcp",
+			"item": [
+				{
+					"name": "sendWithoutReturn",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8092/zcy-patent/restToRPC/sendWithoutReturn"
+					},
+					"response": []
+				},
+				{
+					"name": "sendWithReturn",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8092/zcy-patent/restToRPC/sendWithoutReturn"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

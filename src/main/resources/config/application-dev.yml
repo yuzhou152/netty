@@ -1,0 +1,69 @@
+# 开发环境
+server:
+  port: 8091
+  servlet:
+    context-path: /zcy-patent
+
+spring:
+  application:
+    name: zcy-patent
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/db1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    initialSize: 20
+    maxActive: 100
+    minIdle: 20
+    maxWait: 60000
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 30
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    maxEvictableIdleTimeMillis: 60000
+    validationQuery: SELECT 1 FROM DUAL
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    filters: stat,wall
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss        # 时间格式设置
+    time-zone: GMT+8                        # 时区设置
+    default-property-inclusion: NON_EMPTY   # 设置空值过滤
+  redis:                                    # redis集群配置
+    host: 127.0.0.1
+    port: 6379
+#    cluster:                                # 无中心 主从为1:1 的集群 打开此配置注掉上边单节点配置即可
+#      nodes: 10.171.114.42:7000,10.171.114.42:7001,10.171.114.42:7002,10.171.114.42:7003,10.171.114.42:7004,10.171.114.42:7005
+#      max-redirects: 3                      # 获取失败 最大重定向次数
+    lettuce:
+      pool:
+        max-active: 100                     #连接池最大连接数（使用负值表示没有限制） 默认为8
+        max-idle: 10                        # 连接池中的最大空闲连接 默认为8
+        min-idle: 5                         # 连接池中的最小空闲连接 默认为0
+        max-wait: -1                        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认为-1
+    timeout: 3000000
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+netty:
+  port: 50088 #netty监听的端口号
+  idle:
+    reader: 30 #接收数据的间隔，单位秒，超过此数值未读到数据，将关闭连接，0代表禁用，注：心跳也算，如双方都开心跳，间隔小于此处数值则永远不回断连
+    writer: 30 #发送数据的间隔，单位秒，超过此数值未发送数据，将关闭连接，0代表禁用
+    all: 0 #收发数据的间隔，单位秒，超过此数值既没有收到数据也没有发送数据，则关闭连接，0代表禁用
+  sendFreq: 5000 # 服务端发送心跳包的频率，单位毫秒
+  requestTimeOut: 20 # 消息发送后，等待应答的超时时间，单位秒
+  client1: # 要连接的客户端
+    host: localhost
+    port: 50089
+    intervalSecond: 10000 #重连的间隔时间，单位毫秒

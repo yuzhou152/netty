@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgg.request.dao.archive.ZcyPtArchiveAskMapper">
+    <!-- 实体字段 -->
+    <sql id="zcyPtArchiveAskColumns">
+		id AS id,
+		archive_id AS archiveId,
+		ask_type AS askType,
+		name AS name,
+		content AS content,
+		create_id AS createId,
+		create_name AS createName,
+		create_time AS createTime,
+		modify_id AS modifyId,
+		modify_name AS modifyName,
+		modify_time AS modifyTime
+	</sql>
+	<select id="getZcyPtArchiveAskListByIds" resultType="com.zgg.request.bean.archive.ZcyPtArchiveAsk" parameterType="java.util.List">
+		select
+		<include refid="zcyPtArchiveAskColumns"/>
+		from zcy_pt_archive_ask
+		where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+
+	<delete id="deleteByPrimaryKeyOver" parameterType="java.lang.Integer" >
+		delete from zcy_pt_archive_ask
+    	where id = #{id,jdbcType=INTEGER}
+    </delete>
+	<insert id="insertOver" parameterType="com.zgg.request.bean.archive.ZcyPtArchiveAsk" >
+		insert into zg_user (id, archive_id, ask_type,
+		  name, content, create_id,
+		  create_name, create_time, modify_id,
+		  modify_name, modify_time)
+		values (#{id,jdbcType=INTEGER}, #{archiveId,jdbcType=INTEGER}, #{askType,jdbcType=VARCHAR},
+		  #{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER},
+		  #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=INTEGER},
+		  #{modifyName,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
+	</insert>
+	<update id="updateByPrimaryKeySelectiveOver" parameterType="com.zgg.request.bean.archive.ZcyPtArchiveAsk" >
+		update zg_user
+		<set >
+			<if test="archiveId != null" >
+				archive_id = #{archiveId,jdbcType=INTEGER},
+			</if>
+			<if test="askType != null" >
+				ask_type = #{askType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
+
